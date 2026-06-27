@@ -61,7 +61,7 @@ function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-sm">
-            © {new Date().getFullYear()} WanderStay. All rights reserved.
+            © {new Date().getFullYear()} CosyCloud. All rights reserved.
           </p>
 
           <div className="flex gap-4 text-xl">

@@ -4,14 +4,15 @@ import mongoose, { get } from "mongoose";
 import Listing  from "./model/listing.js";
 const port = 5000;
 const app = express();
-
+import dotenv from "dotenv"
+dotenv.config()
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/AirCloud').then(console.log("mongoose connected"))
+mongoose.connect(process.env.MONGO_URL).then(console.log("mongoose connected"))
 
 
 // get - /listings
