@@ -46,6 +46,6 @@ app.delete("/listings/:id", async (req, res)=>{
      let deletedList = await Listing.findByIdAndDelete(id)
      res.json(deletedList)
 })
-app.listen(port , ()=>{
-    console.log(`http://localhost:${port}`);
+app.listen(process.env.PORT , ()=>{
+    console.log(`http://localhost:${process.env.PORT}`);
 })
