@@ -10,18 +10,23 @@ export default function Register() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [user, setUser] = useState([]);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  console.log(user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await axios.post("http://localhost:5000/register", formData)
-      navigate("/login")
-
+      console.log(res);
+      
+      localStorage.setItem("token", res.data.token) // store the token in loacal storage
+      setUser(res.data.user) //  tell app to who is logged now 
+      navigate("/") // redirect to home
       
 
     } catch (err) {

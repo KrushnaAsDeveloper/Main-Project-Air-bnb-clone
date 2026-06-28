@@ -88,6 +88,20 @@ app.post("/register", async (req, res)=>{
 
     
 })
+app.post("/login", async (req, res)=>{
+    const findUser = await User.findOne(req.body.email)
+    if(!findUser){
+       return res.status(400).json({
+            msg : "email not found !"
+        })
+    }
+    const hashedPassword = bcrypt.hash(req.body.password);
+
+    const enteredPass = bcrypt.compare(req.body.password, hashedPassword)
+
+    
+    
+})
 app.listen(process.env.PORT || 3000 , ()=>{
     console.log(`http://localhost:${process.env.PORT || 3000}`);
 })
