@@ -8,6 +8,8 @@ import Listing from "./Components/Listings.jsx";
 import Root from "./Components/Root.jsx";
 import Update from "./Components/Update.jsx";
 import Expand from "./Components/Expand.jsx";
+import Register from "./Components/Register.jsx";
+import Login from "./Components/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
       {
         path : "listings/:id/details",
         Component : Expand
+      }, 
+      {
+        path : "signup", 
+        Component : Register
+      }, 
+      {
+        path  : "login", 
+        Component : Login
       }
     ],
   },
