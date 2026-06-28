@@ -1,13 +1,15 @@
-import { useState } from "react";
-
+import {  useState } from "react";
+import axios from "axios";
+import { useNavigate, NavLink } from "react-router-dom";
 export default function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [user, setUser] = useState([]);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,22 +20,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+     let res = await axios.post("http://localhost:5000/login", formData)
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Something went wrong");
-        return;
-      }
-
-      localStorage.setItem("token", data.token);
-      console.log("Logged in!", data.user);
-      // TODO: setUser(data.user) via AuthContext + navigate('/')
+      localStorage.setItem("token", res.data.token);
+      navigate("/")
 
     } catch (err) {
       setError("Server error. Try again.");
@@ -106,9 +96,9 @@ export default function Login() {
         {/* Register Link */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Don't have an account?{" "}
-          <a href="/register" className="text-rose-500 font-medium hover:underline">
+          <NavLink to="/signup" className="text-rose-500 font-medium hover:underline">
             Sign up
-          </a>
+          </NavLink>
         </p>
 
       </div>

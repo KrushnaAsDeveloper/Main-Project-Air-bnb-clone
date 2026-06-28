@@ -7,6 +7,7 @@ import Listing  from "./model/listing.js";
 import User from "./model/user.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { protect } from "./middlewares/middleware.js";
 const port = 5000;
 const app = express();
 
@@ -31,7 +32,7 @@ app.get("/listings/:id", async (req,res)=>{
     res.json(singleList);
 })
 // post - /listings
-app.post("/listings", async(req, res) =>{
+app.post("/listings", protect , async(req, res) =>{
     const newListing = await new Listing(req.body.form);
      newListing.save().then(res =>{
         console.log(res)
@@ -39,13 +40,13 @@ app.post("/listings", async(req, res) =>{
     res.json({newListing}); 
 })
 // put - /listing/:id
-app.put("/listings/:id", async (req, res)=>{
+app.put("/listings/:id", protect, async (req, res)=>{
     let id = req.params.id;
     let updateList = await Listing.findByIdAndUpdate(id, req.body, {new:true} )
     res.json(updateList)
 })
 // delete = /listing/:id
-app.delete("/listings/:id", async (req, res)=>{
+app.delete("/listings/:id", protect,  async (req, res)=>{
      let id = req.params.id;
      let deletedList = await Listing.findByIdAndDelete(id)
      res.json(deletedList)
@@ -89,17 +90,37 @@ app.post("/register", async (req, res)=>{
     
 })
 app.post("/login", async (req, res)=>{
-    const findUser = await User.findOne(req.body.email)
+   try {
+     const findUser = await User.findOne({email : req.body.email})
     if(!findUser){
        return res.status(400).json({
             msg : "email not found !"
         })
     }
-    const hashedPassword = bcrypt.hash(req.body.password);
 
-    const enteredPass = bcrypt.compare(req.body.password, hashedPassword)
-
+    const isMatched = await bcrypt.compare(req.body.password, findUser.password)
+    if(!isMatched){
+       return res.status(400).json({
+            msg : "Password is invalid !"
+        })
+    }
     
+    const token = jwt.sign(
+        {userId:findUser._id, email : findUser.email, username : findUser.username}, 
+        process.env.JWT_SECRET, 
+        {expiresIn : "7d"}
+    )
+
+    res.status(201).json({
+        token, 
+        user :{userId : findUser._id, username : findUser.username, email : findUser.email}
+        
+    })
+   } catch (error) {
+    res.status(400).json({
+        msg : "invalid inpute !"
+    })
+   }
     
 })
 app.listen(process.env.PORT || 3000 , ()=>{
