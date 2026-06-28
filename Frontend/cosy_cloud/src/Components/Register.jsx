@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Contexts/AuthContext";
 export default function Register() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -10,12 +11,11 @@ export default function Register() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  const {setUser} = useAuth()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  console.log(user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +26,7 @@ export default function Register() {
       
       localStorage.setItem("token", res.data.token) // store the token in loacal storage
       setUser(res.data.user) //  tell app to who is logged now 
+      setUser(res.data.user)
       navigate("/") // redirect to home
       
 

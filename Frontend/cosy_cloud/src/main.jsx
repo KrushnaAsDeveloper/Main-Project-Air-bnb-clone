@@ -10,7 +10,7 @@ import Update from "./Components/Update.jsx";
 import Expand from "./Components/Expand.jsx";
 import Register from "./Components/Register.jsx";
 import Login from "./Components/Login.jsx";
-
+import { AuthContextProvider } from "../Contexts/AuthContext.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +49,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />,
-
+<AuthContextProvider>
+  <RouterProvider router={router} />
+</AuthContextProvider>
 );

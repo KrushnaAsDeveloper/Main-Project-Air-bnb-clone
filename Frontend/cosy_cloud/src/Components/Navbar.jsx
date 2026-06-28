@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark, faCloudSun } from "@fortawesome/free-solid-svg-icons";
-
+import { useAuth } from "../../Contexts/AuthContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -19,9 +19,10 @@ export default function Navbar() {
         ? "bg-rose-500/20 text-rose-400"
         : "text-white/70 hover:bg-white/10 hover:text-white"
     }`;
-
+    const {user, logout} = useAuth()
   return (
     <nav className="w-full bg-zinc-950/95 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
 
         {/* Logo */}
@@ -90,6 +91,9 @@ export default function Navbar() {
             <NavLink to="/login" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>
               Log in
             </NavLink>
+            {!user ? <p>hiee, {user.username} &&{user.username}</p> : <NavLink className={mobileNavLinkClass} onClick={() => logout}>
+              Logout
+            </NavLink>}
             <NavLink
               to="/signup"
               className="block px-4 py-3 rounded-xl text-sm font-medium bg-rose-500 hover:bg-rose-600 text-white transition-colors text-center"

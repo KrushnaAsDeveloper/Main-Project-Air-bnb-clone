@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
+import { useAuth } from "../../Contexts/AuthContext";
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ export default function Login() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  const {setUser} = useAuth()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -23,6 +24,7 @@ export default function Login() {
      let res = await axios.post("http://localhost:5000/login", formData)
 
       localStorage.setItem("token", res.data.token);
+      setUser(res.data.userr)
       navigate("/")
 
     } catch (err) {
