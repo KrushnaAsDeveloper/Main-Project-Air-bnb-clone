@@ -29,7 +29,10 @@ function Update() {
 
   let onSubmit = async (event) =>{
     event.preventDefault();
-    await axios.put(`http://localhost:5000/listings/${id}`, form);  
+    const token = localStorage.getItem("token")
+    await axios.put(`http://localhost:5000/listings/${id}`, form, { headers: {
+    Authorization: `Bearer ${token}` // 👈 send it
+  }});  
     console.log(form)
     setForm({
         name: "",

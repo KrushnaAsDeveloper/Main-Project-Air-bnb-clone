@@ -12,7 +12,12 @@ const port = 5000;
 const app = express();
 
 
+
 app.use(cors());
+// app.use(cors({
+//   origin: "http://localhost:5173", // your frontend URL
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
@@ -33,7 +38,7 @@ app.get("/listings/:id", async (req,res)=>{
 })
 // post - /listings
 app.post("/listings", protect , async(req, res) =>{
-    const newListing = await new Listing(req.body.form);
+    const newListing = await new Listing({...req.body.form, owner : req.user.userId});
      newListing.save().then(res =>{
         console.log(res)
     })

@@ -12,7 +12,7 @@ export const ListingContextProvider = ({children}) =>{
                 setListings(res.data)    
             }
             fetchData()
-  }, [listings])
+  }, [])
 
   const addListings = (data)=>{
     setListings((prev)=>[...prev, data])

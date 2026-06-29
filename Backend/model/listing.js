@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import User from "./user.js";
 
  const listingSchema = new Schema({
     name : {
@@ -19,6 +20,10 @@ import mongoose, { Schema } from "mongoose";
     }, 
     price : {
         type : Number
+    }, 
+    owner :{
+        type : Schema.Types.ObjectId, 
+        ref : "User"
     }
 
 
