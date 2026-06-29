@@ -26,9 +26,14 @@ mongoose.connect(process.env.MONGO_URL).then(()=>console.log("mongoose connected
 
 
 // get - /listings
-app.get("/listings", async (req, res)=>{
-    const allListings = await Listing.find();
-    res.json(allListings);
+app.get("/listings", protect,  async (req, res)=>{
+    const myListing = await Listing.find({owner : req.user.userId});
+    
+    res.json(myListing);
+})
+app.get("/listings/my", protect, async (req, res)=>{
+    const myListing = await Listing.find({owner : req.user.userId});
+    res.json(myListing)
 })
 app.get("/listings/:id", async (req,res)=>{
     let id = req.params.id;
@@ -38,10 +43,8 @@ app.get("/listings/:id", async (req,res)=>{
 })
 // post - /listings
 app.post("/listings", protect , async(req, res) =>{
-    const newListing = await new Listing({...req.body.form, owner : req.user.userId});
-     newListing.save().then(res =>{
-        console.log(res)
-    })
+    const newListing =  new Listing({...req.body.form, owner : req.user.userId});
+    await newListing.save()
     res.json({newListing}); 
 })
 // put - /listing/:id
@@ -85,7 +88,7 @@ app.post("/register", async (req, res)=>{
     res.status(201).json({
         
         token, 
-        user :{id : newUser._id, username : newUser.username, email : newUser.email}
+        user :{userId : newUser._id, username : newUser.username, email : newUser.email}
     }
     )
     } catch (error) {

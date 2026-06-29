@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark, faCloudSun, faL, faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../Contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) =>
@@ -51,6 +53,11 @@ export default function Navbar() {
               Create Listing
             </NavLink>
           </li>
+          {user ? <li>
+            <NavLink to="/listings/my" className={navLinkClass}>
+              My Listings
+            </NavLink>
+          </li> : null}
         </ul>
 
         {/* Desktop CTA */}
@@ -74,8 +81,8 @@ export default function Navbar() {
             <div className=" flex justify-center items-center">
               <p className="text-xl mx-2 text-white ">
                 Hello,<span className="font-bold">@{user.username}</span>
-              </p>{" "}
-              <NavLink className={mobileNavLinkClass} onClick={()=>logout()}>
+              </p>
+              <NavLink className={mobileNavLinkClass} onClick={()=>{navigate("/login") ;logout() }}>
                 Logout
               </NavLink>
             </div>

@@ -22,12 +22,10 @@ import User from "./user.js";
         type : Number
     }, 
     owner :{
-        type : Schema.Types.ObjectId, 
-        ref : "User"
+        type : mongoose.Schema.Types.ObjectId, 
+        ref : "User",  
+        required : true
     }
-
-
-
  }
      
  )

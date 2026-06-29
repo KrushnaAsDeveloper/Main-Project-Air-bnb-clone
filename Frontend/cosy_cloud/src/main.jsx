@@ -11,6 +11,7 @@ import Expand from "./Components/Expand.jsx";
 import Register from "./Components/Register.jsx";
 import Login from "./Components/Login.jsx";
 import { AuthContextProvider } from "../Contexts/AuthContext.jsx";
+import MyListings from "./Components/MyListings.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path  : "login", 
         Component : Login
+      }, 
+      {
+        path : "listings/my", 
+        Component : MyListings
       }
     ],
   },
