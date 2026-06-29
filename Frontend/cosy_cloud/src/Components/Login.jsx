@@ -21,10 +21,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-     let res = await axios.post("http://localhost:5000/login", formData)
+     let res = await axios.post("http://192.168.0.102:5000/login", formData)
 
       localStorage.setItem("token", res.data.token);
-      setUser(res.data.userr)
+      setUser(res.data.user)
       navigate("/")
 
     } catch (err) {

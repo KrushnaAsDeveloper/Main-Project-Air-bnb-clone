@@ -4,7 +4,7 @@ export default function ListCard({ listing }) {
   const navigate = useNavigate();
 
   function navigateToEdit() {
-    navigate(`/listings/${listing._id}/details`);
+    navigate(`/listings/${listing._id}`);
   }
   return (
     <>

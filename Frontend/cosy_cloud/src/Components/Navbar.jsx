@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark, faCloudSun, faL } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faCloudSun, faL, faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../Contexts/AuthContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -75,7 +75,7 @@ export default function Navbar() {
               <p className="text-xl mx-2 text-white ">
                 Hello,<span className="font-bold">@{user.username}</span>
               </p>{" "}
-              <NavLink className={mobileNavLinkClass} onClick={()=>{logout(), setMenuOpen(false)}}>
+              <NavLink className={mobileNavLinkClass} onClick={()=>logout()}>
                 Logout
               </NavLink>
             </div>
@@ -143,7 +143,7 @@ export default function Navbar() {
               </div>
             ) : (
               <div className=" flex justify-center items-center">
-                <NavLink className={mobileNavLinkClass} onClick={()=>logout()} >
+                <NavLink className={mobileNavLinkClass} onClick={()=>{logout(), setMenuOpen(false)}} >
                   Logout
                 </NavLink>
               </div>

@@ -21,7 +21,7 @@
       event.preventDefault();
       const token = localStorage.getItem("token")
       console.log(token)
-      let res = await axios.post("http://localhost:5000/listings", {form} , {headers :{
+      let res = await axios.post("http://192.168.0.102:5000/listings", {form} , {headers :{
         authorization : `Bearer ${token}`
       }});  
       

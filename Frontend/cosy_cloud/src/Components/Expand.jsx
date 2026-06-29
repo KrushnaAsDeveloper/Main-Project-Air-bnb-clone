@@ -9,7 +9,7 @@ function Expand() {
   
 useEffect(()=>{
   const fetchSingleData = async () =>{
-  const res = await axios.get(`http://localhost:5000/listings/${id}` )
+  const res = await axios.get(`http://192.168.0.102:5000/listings/${id}` )
   setListing(res.data)
 }
 fetchSingleData()
@@ -17,7 +17,7 @@ fetchSingleData()
 
   const deleteListing =  ()=>{
     const token = localStorage.getItem("token")
-     axios.delete(`http://localhost:5000/listings/${id}`, { headers: {
+     axios.delete(`http://192.168.0.102:5000/listings/${id}`, { headers: {
     Authorization: `Bearer ${token}` // 👈 send it
   }})
     

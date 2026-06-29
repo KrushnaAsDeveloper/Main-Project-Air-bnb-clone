@@ -8,7 +8,7 @@ export const ListingContextProvider = ({children}) =>{
   const [listings, setListings] = useState([]);
   useEffect(()=>{
     const fetchData = async () => {
-                let res = await axios.get("http://localhost:5000/listings")  
+                let res = await axios.get("http://192.168.0.102:5000/listings")  
                 setListings(res.data)    
             }
             fetchData()
