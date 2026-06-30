@@ -22,10 +22,6 @@ const router = createBrowserRouter([
         Component: Listing,
       },
       {
-        path: " ",
-        Component: Listing,
-      },
-      {
         path : "listings/new",
         Component : Create
       }, 
