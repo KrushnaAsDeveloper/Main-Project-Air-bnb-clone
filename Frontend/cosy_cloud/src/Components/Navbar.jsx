@@ -5,7 +5,11 @@ import { faBars, faXmark, faCloudSun, faL, faLeaf } from "@fortawesome/free-soli
 import { useAuth } from "../../Contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 export default function Navbar() {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
+  const navigateToLogin=()=>{
+    navigate("/login")
+    console.log("login ")
+  }
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) =>
@@ -82,7 +86,7 @@ export default function Navbar() {
               <p className="text-xl mx-2 text-white ">
                 Hello,<span className="font-bold">@{user.username}</span>
               </p>
-              <NavLink className={mobileNavLinkClass} onClick={()=>{navigate("/login") ;logout() }}>
+              <NavLink to='/login' className={mobileNavLinkClass} onClick={()=>{logout()}}>
                 Logout
               </NavLink>
             </div>
@@ -150,7 +154,7 @@ export default function Navbar() {
               </div>
             ) : (
               <div className=" flex justify-center items-center">
-                <NavLink className={mobileNavLinkClass} onClick={()=>{logout(), setMenuOpen(false)}} >
+                <NavLink to="/login" className={mobileNavLinkClass} onClick={()=>{logout(), setMenuOpen(false), navigateToLogin()}} >
                   Logout
                 </NavLink>
               </div>

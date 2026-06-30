@@ -11,15 +11,6 @@ const [tk , setTk ] = useState()
   const t = localStorage.getItem("token");
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token")
-      let res = await axios.get("http://192.168.0.102:5000/listings", {headers : {Authorization : `Bearer ${token}`}});
-    console.log('first')
-    setListings(res.data);
-  }
-    fetchData();
-  }, [setTk]);
 
 
 
