@@ -44,6 +44,10 @@ const router = createBrowserRouter([
       {
         path : "listings/my", 
         Component : MyListings
+      }, 
+      {
+        path : "listings/my/:id/details", 
+        Component : Expand
       }
     ],
   },
