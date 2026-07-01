@@ -19,11 +19,10 @@ let token = useAuth()
     }
       fetchData();
     }, [])
-    const {user} = useAuth()
   return (
     
     <>
-      {!user ? <h1 className="h-screen w-full my-20 text-4xl uppercase font-bold text-center"> there is no listing  <NavLink className="underline text-blue-500" to="/login"> plz Login</NavLink></h1> :
+      
       <div className="flex justify-center flex-wrap min-h-screen">
         
         {listings.map((elem) => (
@@ -35,7 +34,6 @@ let token = useAuth()
           
         ))}
       </div>
-      }
       
     </>
   );
