@@ -25,7 +25,7 @@ export default function Login() {
 
       localStorage.setItem("token", res.data.token);
       setUser(res.data.user)
-      navigate("/")
+      navigate("/listings/my")
 
     } catch (err) {
       setError("Server error. Try again.");
