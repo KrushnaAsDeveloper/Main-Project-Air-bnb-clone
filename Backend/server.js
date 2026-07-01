@@ -26,8 +26,8 @@ mongoose.connect(process.env.MONGO_URL).then(()=>console.log("mongoose connected
 
 
 // get - /listings
-app.get("/listings", protect,  async (req, res)=>{
-    const myListing = await Listing.find({owner : req.user.userId});
+app.get("/listings",  async (req, res)=>{
+    const myListing = await Listing.find(req.params.id);
     
     res.json(myListing);
 })
