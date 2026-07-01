@@ -3,6 +3,8 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react'
+import MyListCard from './MyListCard';
+import { useAuth } from '../../Contexts/AuthContext';
 
 function MyListings() {
     const [myListings, setMyListings] = useState([]);
@@ -22,24 +24,11 @@ function MyListings() {
     }, [])
   return (
     <>
-        <div className="max-w-4xl mx-auto mt-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">My Listings</h1>
-      {myListings.length === 0 ? (
-        <p>You haven't created any listings yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {myListings.map((listing) => (
-            <div key={listing._id} className="border rounded-xl p-4 shadow">
-              <img src={listing.image} className="w-full h-48 object-cover rounded-lg mb-3" />
-              <h3 className="font-semibold text-lg">{listing.name}</h3>
-              <p className="text-gray-500">{listing.location}, {listing.country}</p>
-              <p className="text-green-600 font-bold mt-1">₹{listing.price}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-
+       <div className="flex justify-center flex-wrap min-h-screen">
+        {myListings.map((elem) =>(
+        <MyListCard key={elem._id} listing={elem} />
+       ))}
+       </div>
     </>
   )
 }
