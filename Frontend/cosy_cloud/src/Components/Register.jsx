@@ -2,6 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 export default function Register() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -11,6 +14,12 @@ export default function Register() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [show , setShow] = useState("password")
+const showPass = () =>{
+    show == "password" ? setShow("text") : setShow("password")
+  }
+
+  
   const {setUser} = useAuth()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +30,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://192.168.0.102:5000/register", formData)
+      const res = await axios.post("http:// 192.168.0.101:5000/register", formData)
       console.log(res);
       
       localStorage.setItem("token", res.data.token) // store the token in loacal storage
@@ -88,18 +97,20 @@ export default function Register() {
           </div>
 
           {/* Password */}
-          <div>
+        <div >
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
-            <input
-              type="password"
+            <div className="flex relative justify-center items-center">
+              <input
+              type={show}
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Min. 6 characters"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition"
-            />
+              placeholder="Your password"
+              className="w-full  px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition"
+            /> <button className="absolute right-2 cursor-pointer" onClick={showPass}>{show == "password" ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>} </button> 
+            </div>
           </div>
 
           {/* Submit */}
@@ -116,9 +127,9 @@ export default function Register() {
         {/* Login Link */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Already have an account?{" "}
-          <a href="/login" className="text-rose-500 font-medium hover:underline">
+          <NavLink to="/login" className="text-rose-500 font-medium hover:underline">
             Log in
-          </a>
+          </NavLink>
         </p>
 
       </div>
