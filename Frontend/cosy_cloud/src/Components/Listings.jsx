@@ -8,17 +8,19 @@ import { useAuth } from "../../Contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 export default function Listing() {
 const [listings, setListings] = useState([])
-let token = useAuth()
+let {token, user} = useAuth()
+console.log("user preview", user);
     useEffect(() => {
       const fetchData = async () => {
       const token = localStorage.getItem("token")
 
-        let res = await axios.get("http://192.168.0.102:5000/listings", {headers : {Authorization : `Bearer ${token}`}});
+        let res = await axios.get("http://192.168.0.101:5000/listings", {headers : {Authorization : `Bearer ${token}`}});
      
       setListings(res.data);
     }
       fetchData();
     }, [])
+    
   return (
     
     <>

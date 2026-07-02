@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 function MyListCard({listing}) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex flex-wrap">
@@ -38,11 +39,11 @@ function MyListCard({listing}) {
                 ₹{listing.price}
               </div>
 
-              <NavLink to={`${listing._id}/details`}
+              <button onClick={()=>{navigate(``)}}
                 className="bg-indigo-600 cursor-pointer text-white px-5 py-2 rounded-xl hover:bg-indigo-700 active:scale-95 transition-all duration-200"
               >
                 Explore
-              </NavLink>
+              </button>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ const showPass = () =>{
     e.preventDefault();
 
     try {
-      const res = await axios.post("http:// 192.168.0.101:5000/register", formData)
+      const res = await axios.post("http://192.168.0.101:5000/register", formData)
       console.log(res);
       
       localStorage.setItem("token", res.data.token) // store the token in loacal storage
