@@ -11,7 +11,7 @@ function Expand() {
   
 useEffect(()=>{
   const fetchSingleData = async () =>{
-  const res = await axios.get(`http://192.168.0.101:5000/listings/${id}` )
+  const res = await axios.get(`http://loacalhost:5000/listings/${id}` )
   setListing(res.data)
 }
 fetchSingleData()
@@ -19,7 +19,7 @@ fetchSingleData()
 
   const deleteListing =  ()=>{
     const token = localStorage.getItem("token")
-     axios.delete(`http://  192.168.0.101:5000/listings/${id}`, { headers: {
+     axios.delete(`http://   loacalhost:5000/listings/${id}`, { headers: {
     Authorization: `Bearer ${token}` 
   }})
     
@@ -58,10 +58,10 @@ fetchSingleData()
         </div>
       </div>
     {
-      String(user?._id) === String(listing.owner) ? <div className='flex absolute right-5 bottom-5'>
+      String(user?._id) === String(listing.owner) ? null : <div className='flex absolute right-5 bottom-5'>
       <button className=" cursor-pointer px-6 py-3 bg-red-600 rounded-2xl mx-2 text-white " onClick={()=>{navigate(`/listings/${id}/edit`)}}>Update</button>
     <button className=" cursor-pointer px-6 py-3 bg-red-600 rounded-2xl mx-2 text-white" onClick={deleteListing}>Delete</button>
-    </div>  : null
+    </div> 
     }
     </div>
     </>

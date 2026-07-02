@@ -24,7 +24,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-     let res = await axios.post("http://192.168.0.101:5000/login", formData)
+     let res = await axios.post("http://loacalhost:5000/login", formData)
 
       localStorage.setItem("token", res.data.token);
       setUser(res.data.user)
