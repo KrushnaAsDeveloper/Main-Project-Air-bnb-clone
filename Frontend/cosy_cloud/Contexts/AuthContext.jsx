@@ -16,7 +16,9 @@
             }else{
                 setUser(decode)
             }
+            
             }
+            console.log(user)
         }, [])
 
         const logout = ()=>{

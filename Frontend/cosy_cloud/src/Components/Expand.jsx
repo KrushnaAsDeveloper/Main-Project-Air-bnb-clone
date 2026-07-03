@@ -3,15 +3,16 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../Contexts/AuthContext';
 
+
 function Expand() {
-  const user = useAuth()
   const [listing, setListing] = useState([]);
   const navigate = useNavigate()
   const {id} = useParams();
+  const {user} = useAuth()
   
-useEffect(()=>{
+  useEffect(()=>{
   const fetchSingleData = async () =>{
-  const res = await axios.get(`http://loacalhost:5000/listings/${id}` )
+  const res = await axios.get(`http://localhost:5000/api/listings/${id}` )
   setListing(res.data)
 }
 fetchSingleData()
@@ -19,7 +20,7 @@ fetchSingleData()
 
   const deleteListing =  ()=>{
     const token = localStorage.getItem("token")
-     axios.delete(`http://   loacalhost:5000/listings/${id}`, { headers: {
+     axios.delete(`http://localhost:5000/api/listings/${id}`, { headers: {
     Authorization: `Bearer ${token}` 
   }})
     
@@ -58,7 +59,8 @@ fetchSingleData()
         </div>
       </div>
     {
-      String(user?._id) === String(listing.owner) ? null : <div className='flex absolute right-5 bottom-5'>
+      
+      <div className='flex absolute right-5 bottom-5'>
       <button className=" cursor-pointer px-6 py-3 bg-red-600 rounded-2xl mx-2 text-white " onClick={()=>{navigate(`/listings/${id}/edit`)}}>Update</button>
     <button className=" cursor-pointer px-6 py-3 bg-red-600 rounded-2xl mx-2 text-white" onClick={deleteListing}>Delete</button>
     </div> 

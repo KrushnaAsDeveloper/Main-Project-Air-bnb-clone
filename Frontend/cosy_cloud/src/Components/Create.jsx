@@ -1,7 +1,6 @@
   import { useState } from "react";
   import { useNavigate } from "react-router-dom";
   import axios from "axios";
-  import { useListingInfo } from "../../Contexts/ListingInfo";
   export default function Create() {
     let navigate = useNavigate();
     const [form, setForm] = useState({
@@ -15,18 +14,16 @@
     let handleInput = (event) =>{
       setForm({...form, [event.target.name] : event.target.value });
     }
-    const {addListings} = useListingInfo()
     let onSubmit = async (event) =>{
 
       event.preventDefault();
       const token = localStorage.getItem("token")
       console.log(token)
-      let res = await axios.post("http://   loacalhost:5000/listings", {form} , {headers :{
+      let res = await axios.post("http://localhost:5000/api/listings", {form} , {headers :{
         authorization : `Bearer ${token}`
       }});  
       
 
-      addListings(res.data.newListing)//observation is imp  
       setForm({
           name: "",
       description: "",

@@ -17,7 +17,7 @@ function Update() {
     console.log(id)
     useEffect(()=>  {
         async function updateData() {
-        let formData = await axios.get(`http://   loacalhost:5000/listings/${id}`)
+        let formData = await axios.get(`http://localhost:5000/api/listings/${id}`)
         setForm(formData.data)
         }
         updateData()
@@ -30,7 +30,7 @@ function Update() {
   let onSubmit = async (event) =>{
     event.preventDefault();
     const token = localStorage.getItem("token")
-    await axios.put(`http://loacalhost:5000/listings/${id}`, form, { headers: {
+    await axios.put(`http://localhost:5000/api/listings/${id}`, form, { headers: {
     Authorization: `Bearer ${token}` // 👈 send it
   }});  
     console.log(form)
@@ -128,7 +128,7 @@ function Update() {
       type="submit"
       className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition"
     >
-      Create Listing
+      Update Listing
     </button>
   </div>
 </form>

@@ -30,7 +30,7 @@ const showPass = () =>{
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://loacalhost:5000/register", formData)
+      const res = await axios.post("http://localhost:5000/api/auth/register", formData)
       console.log(res);
       
       localStorage.setItem("token", res.data.token) // store the token in loacal storage

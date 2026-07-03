@@ -13,7 +13,7 @@ function MyListings() {
             try {
                 const token = localStorage.getItem("token")
             console.log(token)
-           let res = await axios.get("http://loacalhost:5000/listings/my", {headers : {Authorization : `Bearer ${token}`}})
+           let res = await axios.get("http://localhost:5000/api/listings/my", {headers : {Authorization : `Bearer ${token}`}})
         setMyListings(res.data)
             console.log(res.data)
             } catch (error) {
