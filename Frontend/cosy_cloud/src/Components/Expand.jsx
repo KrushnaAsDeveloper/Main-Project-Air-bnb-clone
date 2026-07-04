@@ -12,7 +12,7 @@ function Expand() {
   
   useEffect(()=>{
   const fetchSingleData = async () =>{
-  const res = await axios.get(`http://localhost:5000/api/listings/${id}` )
+  const res = await axios.get(`/api/listings/${id}` )
   setListing(res.data)
 }
 fetchSingleData()
@@ -20,7 +20,7 @@ fetchSingleData()
 
   const deleteListing =  ()=>{
     const token = localStorage.getItem("token")
-     axios.delete(`http://localhost:5000/api/listings/${id}`, { headers: {
+     axios.delete(`/api/listings/${id}`, { headers: {
     Authorization: `Bearer ${token}` 
   }})
     

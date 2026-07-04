@@ -13,7 +13,7 @@ console.log("user preview", user?.userId);
       const fetchData = async () => {
       const token = localStorage.getItem("token")
 
-        let res = await axios.get("http://localhost:5000/api/listings", {headers : {Authorization : `Bearer ${token}`}});
+        let res = await axios.get("/api/listings", {headers : {Authorization : `Bearer ${token}`}});
      
       setListings(res.data);
     }
