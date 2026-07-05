@@ -1,5 +1,5 @@
 import express from 'express'
-import Listing from '../model/listing.js';
+import Listing from '../model/listing.model.js';
 
 export const findAllListings = async (req, res)=>{
     try {

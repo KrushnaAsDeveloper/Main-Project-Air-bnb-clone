@@ -1,7 +1,8 @@
 import express from "express"
-import { findMylistings, findAllListings, createNewListing, updateListing, deleteListing, findSingleListing } from "../controllers/ListingsControllers.js"
-import { protect } from "../middlewares/middleware.js"
-const router =  express.Router()
+import { Router } from "express"
+import { findMylistings, findAllListings, createNewListing, updateListing, deleteListing, findSingleListing } from "../controllers/listing.controller.js"
+import { protect } from "../middlewares/user.middleware.js"
+const router = Router()
 
 // get - /listings
 router.get("/", findAllListings )
