@@ -15,7 +15,7 @@ export const Register = async (req, res)=>{
     const hashedPassword = await bcrypt.hash(password ,10);
 // create and saved the new user by saving the password in the hasedform
     const newUser = new User({email, username,  password : hashedPassword})
-    newUser.save().then(res=>{
+    await newUser.save().then(res=>{
         console.log(res);
         
     })
@@ -34,7 +34,7 @@ export const Register = async (req, res)=>{
     }
     )
     } catch (error) {
-         res.status(500).json({ message: "Server error", error: err.message })
+         res.status(500).json({ message: "Server error", error })
     }
 
     
