@@ -1,0 +1,43 @@
+# Package managers and dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build and compilation outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diagnostic tool outputs
+coverage/
+.nyc_output/
+
+# IDEs, editors, and OS system files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
+
+# Environment variables (prevents unintentional restructuring)
+.env
+.env.*
+!.env.example
+
+# Optional: Compiled documentation or static visual assets
+# public/
+# docs/

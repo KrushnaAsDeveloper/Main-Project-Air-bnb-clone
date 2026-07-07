@@ -10,6 +10,7 @@ import jwt from "jsonwebtoken";
 import { protect } from "./middlewares/user.middleware.js";
 import listingsRouter from "./routes/listings.routes.js";
 import userRouter from "./routes/user.routes.js"
+import { db_connection } from "./db/db.js";
 const port = 5000;
 const app = express();
 
@@ -17,9 +18,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true, limit : "20kb" }));
 app.use(express.json({limit : "20kb"}));
 
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log("mongoose connected"));
+db_connection()
 
 app.use("/api/listings", listingsRouter);
 app.use("/api/auth", userRouter)
