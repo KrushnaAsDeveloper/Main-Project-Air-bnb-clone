@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { db_name } from "../constant.js";
 
-export const  db_connection = async () =>  {
+export const db_connection = async () =>  {
   try {
     
    const connectionsInstence = await mongoose
@@ -10,7 +10,8 @@ export const  db_connection = async () =>  {
   console.log(`MONGO CONNECTEC !! ~ DB HOST : ${connectionsInstence.connection.host}`)
   } catch (error) {
     console.log(error)
+    process.exit()        
     
   }
 
-}
+} 

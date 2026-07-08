@@ -1,1 +1,1 @@
-export const db_name = "cosyCloud"
+export const db_name = "cosycloud"

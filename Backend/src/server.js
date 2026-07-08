@@ -18,11 +18,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true, limit : "20kb" }));
 app.use(express.json({limit : "20kb"}));
 
-db_connection()
+db_connection().then(()=>{
+  app.listen(process.env.PORT || 8000, ()=>{
+    console.log(`server is running on port ${process.env.PORT || 8000} http://localhost:${process.env.PORT || 8000}/api/listings/`)
+  })
+}).catch((err)=>{
+  console.log("mongodb connetion error", err)
+})
 
 app.use("/api/listings", listingsRouter);
 app.use("/api/auth", userRouter)
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`http://localhost:${process.env.PORT || 3000}`);
-});
+
