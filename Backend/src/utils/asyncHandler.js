@@ -7,3 +7,14 @@ const asyncHandler = (fn)=> async (req, res, next)=>{
         })
     }
 }
+
+
+// one more variety use in the production where we directly handle the promise 
+
+// const asyncHandler = (fn)=> {
+//     return Promise.resolve(fu(req,res,next)).catch(error => next(error))
+// }
+// // copilet says this is the better for production 
+
+
+export {asyncHandler}
