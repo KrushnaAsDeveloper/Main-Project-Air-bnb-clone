@@ -127,6 +127,11 @@ export default function Navbar() {
           >
             Listings
           </NavLink>
+          {user ? 
+            <NavLink to="/listings/my" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>
+              My Listings
+            </NavLink>
+           : null}
           <NavLink
             to="/listings/new"
             className={mobileNavLinkClass}
