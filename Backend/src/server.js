@@ -7,13 +7,14 @@ import Listing from "./model/listing.model.js";
 import User from "./model/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import path from "path"
 import { protect } from "./middlewares/user.middleware.js";
 import listingsRouter from "./routes/listings.routes.js";
 import userRouter from "./routes/user.routes.js"
 import { db_connection } from "./db/db.js";
 const port = 5000;
 const app = express();
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(express.urlencoded({ extended: true, limit : "20kb" }));
 app.use(express.json({limit : "20kb"}));
