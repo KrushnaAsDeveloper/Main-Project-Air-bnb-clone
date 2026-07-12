@@ -9,8 +9,9 @@ import User from "./user.model.js";
         type : String
     }, 
     image :{
-        type : String, 
-        default: "https://images.pexels.com/photos/8089172/pexels-photo-8089172.jpeg"
+        type :String, 
+        default: "https://images.pexels.com/photos/8089172/pexels-photo-8089172.jpeg", 
+        toString : true
     }, 
     country : {
         type : String
@@ -24,7 +25,6 @@ import User from "./user.model.js";
     owner :{
         type : mongoose.Schema.Types.ObjectId, 
         ref : "User",  
-        required : true
     }
  }
      

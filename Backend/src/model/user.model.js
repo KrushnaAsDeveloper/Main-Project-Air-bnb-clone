@@ -48,6 +48,32 @@ userSchema.methods.genrateAccessToken = function() {
     }
     )
 }
+userSchema.methods.genrateAccessToken = function() {
+    return jwt.sign(
+        {
+        _id : this._id, 
+        username : this.username, 
+        email : this.email,
+        
+    },  
+    process.env.ACCESS_TOKEN_SECRET, 
+    {
+        expiresIn : process.env.ACCESS_TOKEN_EXPIREY
+    }
+    )
+}
+userSchema.methods.genrateRefreshToken = function() {
+    const token =  jwt.sign(
+        {
+        _id : this._id, 
+        
+    },  
+    process.env.REFRESH_TOKEN_SECRET, 
+    {
+        expiresIn : process.env.REFRESH_TOKEN_EXPIREY
+    }
+    )
+}
 const User = mongoose.model("User", userSchema);
 
 export default User;

@@ -13,7 +13,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All feilds are required !")
   }
 
-  console.log(req.files)
+  
   const existedUser = await User.findOne({$or:[{username}, {email}]})
   if(existedUser){
     throw new ApiError(400, "User existed!");

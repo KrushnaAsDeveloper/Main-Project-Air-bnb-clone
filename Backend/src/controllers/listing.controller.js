@@ -42,12 +42,10 @@ export const findSingleListing = async (req, res) => {
 
 export const createNewListing = async (req, res) => {
   try {
-    const newListing = new Listing({
-      ...req.body.form,
-      owner: req.user.userId,
-    });
+    console.log(req)
+    const newListing = new Listing(req.body);
     await newListing.save();
-    res.json({ newListing });
+    res.json({ msg : newListing });
   } catch (error) {
     console.log("create listing", error);
     return res.status(500).json({
