@@ -8,22 +8,18 @@
       description: "",
       country: "",
       location: "",
-      price :""
+      price :"", 
+      image : ""
 
     });
     let handleInput = (event) =>{
-      setForm({...form, [event.target.name] : event.target.value });
+      setForm({...form, [event.target.name] : event.target.value,});
     }
     let onSubmit = async (event) =>{
 
       event.preventDefault();
-      const token = localStorage.getItem("token")
-      console.log(token)
-      let res = await axios.post("/api/listings", {form} , {headers :{
-        authorization : `Bearer ${token}`
-      }});  
-      
-
+      let res = await axios.post("/api/listings", {form}, {headers: { "Content-Type": "multipart/form-data" }});  
+      console.log(form)
       setForm({
           name: "",
       description: "",
@@ -72,7 +68,7 @@
       <div>
         <label className="block mb-2 font-medium">Image URL</label>
         <input
-          type="text"
+          type="file"
           placeholder="https://example.com/image.jpg"
           name="image"
           onChange={handleInput}
