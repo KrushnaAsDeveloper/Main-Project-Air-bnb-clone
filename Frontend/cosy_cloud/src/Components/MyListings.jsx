@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { useState } from 'react'
 import MyListCard from './MyListCard';
 import { useAuth } from '../../Contexts/AuthContext';
-import api from '../api/axios.api';
 
 function MyListings() {
     const [myListings, setMyListings] = useState([]);
@@ -14,7 +13,7 @@ function MyListings() {
             try {
                 const token = localStorage.getItem("token")
             console.log(token)
-           let res = await api.get("/api/listings/my", {headers : {Authorization : `Bearer ${token}`}})
+           let res = await axios.get("/api/listings/my", {headers : {Authorization : `Bearer ${token}`}})
         setMyListings(res.data)
             console.log(res.data)
             } catch (error) {

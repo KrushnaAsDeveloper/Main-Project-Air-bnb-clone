@@ -1,6 +1,5 @@
   import { useState } from "react";
   import { useNavigate } from "react-router-dom";
-  import api from '../api/axios.api';
   import axios from "axios";
   export default function Create() {
     let navigate = useNavigate();
@@ -24,7 +23,7 @@
     let onSubmit = async (event) =>{
       setLoading(true)
       event.preventDefault();
-      // we are using the new form data just becuase when we pass the all form data through the useState variable then api internally stringyfies it thats why when we send the file then file path become empty or null thats why we do this 
+      // we are using the new form data just becuase when we pass the all form data through the useState variable then axios internally stringyfies it thats why when we send the file then file path become empty or null thats why we do this 
       
       const fd = new FormData();
       fd.append("name" , form.name)
@@ -33,7 +32,7 @@
       fd.append("location" , form.location)
       fd.append("price" , form.price)
       fd.append("image" , form.image)
-      let res = await api.post("/api/listings", fd);  
+      let res = await axios.post("/api/listings", fd);  
       console.log(form)
       setForm({
           name: "",

@@ -5,7 +5,6 @@ import { useAuth } from "../../Contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import api from '../api/axios.api';
 export default function Register() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -31,7 +30,7 @@ const showPass = () =>{
     e.preventDefault();
 
     try {
-      const res = await api.post("/api/v1/auth/register", formData)
+      const res = await axios.post("/api/v1/auth/register", formData)
       console.log(res);
       
       localStorage.setItem("token", res.data.token) // store the token in loacal storage

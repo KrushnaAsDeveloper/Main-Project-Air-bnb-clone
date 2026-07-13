@@ -3,7 +3,6 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import api from '../api/axios.api';
 function Update() {
     let navigate = useNavigate()
     let {id} = useParams();
@@ -22,7 +21,7 @@ function Update() {
     console.log(id)
     useEffect(()=>  {
         async function updateData() {
-        let formData = await api.get(`/api/listings/${id}`)
+        let formData = await axios.get(`/api/listings/${id}`)
         setForm(formData.data)
         }
         updateData()
@@ -48,7 +47,7 @@ function Update() {
     fd.append("location",  form.location)
     fd.append("price",  form.price)
     fd.append("image",  form.image)
-    await api.put(`/api/listings/${id}`, fd );  
+    await axios.put(`/api/listings/${id}`, fd );  
     setForm({
         name: "",
     description: "",

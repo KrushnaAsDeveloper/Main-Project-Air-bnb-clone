@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../Contexts/AuthContext';
-import api from '../api/axios.api';
+
 
 function Expand() {
   const [listing, setListing] = useState([]);
@@ -12,7 +12,7 @@ function Expand() {
   
   useEffect(()=>{
   const fetchSingleData = async () =>{
-  const res = await api.get(`/api/listings/${id}` )
+  const res = await axios.get(`/api/listings/${id}` )
   setListing(res.data)
 }
 fetchSingleData()
@@ -20,7 +20,7 @@ fetchSingleData()
 
   const deleteListing =  ()=>{
     const token = localStorage.getItem("token")
-     api.delete(`/api/listings/${id}`, { headers: {
+     axios.delete(`/api/listings/${id}`, { headers: {
     Authorization: `Bearer ${token}` 
   }})
     

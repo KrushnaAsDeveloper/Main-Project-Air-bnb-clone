@@ -4,7 +4,6 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import api from '../api/axios.api';
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,7 +24,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-     let res = await api.post("/api/auth/login", formData)
+     let res = await axios.post("/api/auth/login", formData)
 
       localStorage.setItem("token", res.data.token);
       setUser(res.data.user)
