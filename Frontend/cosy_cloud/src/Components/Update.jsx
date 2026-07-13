@@ -7,13 +7,17 @@ function Update() {
     let navigate = useNavigate()
     let {id} = useParams();
     const [form, setForm] = useState({
+
     name: "",
     description: "",
     country: "",
     location: "",
-    price :""
+    price :"", 
+    image : null
 
   });
+  const [loading , setLoading] = useState(false);
+
     console.log(id)
     useEffect(()=>  {
         async function updateData() {
@@ -27,20 +31,32 @@ function Update() {
     setForm({...form, [event.target.name] : event.target.value });
   }
 
+  let handelFile = (event) =>{
+    let file = event.target.files[0];
+    setForm({...form, image : file})
+  }
   let onSubmit = async (event) =>{
+
     event.preventDefault();
-    const token = localStorage.getItem("token")
-    await axios.put(`/api/listings/${id}`, form, { headers: {
-    Authorization: `Bearer ${token}` 
-  }});  
-    console.log(form)
+    setLoading(true)
+    // const token = localStorage.getItem("token")
+    const fd = new FormData();
+    fd.append("name",  form.name)
+    fd.append("description",  form.description)
+    fd.append("country",  form.country)
+    fd.append("location",  form.location)
+    fd.append("price",  form.price)
+    fd.append("image",  form.image)
+    await axios.put(`/api/listings/${id}`, fd );  
     setForm({
         name: "",
     description: "",
     country: "",
     location: "",
-    price:""
+    price:"", 
+    image : null
     })
+    setLoading(false)
     navigate(`/listings/${id}/details`)
 
   }
@@ -81,10 +97,9 @@ function Update() {
     <div>
       <label className="block mb-2 font-medium">Image URL</label>
       <input
-        type="text"
-        placeholder="https://example.com/image.jpg"
+        type="file"
         name="image" 
-        onChange={handleInput}
+        onChange={handelFile}
         className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-green-500"
       />
     </div>
@@ -128,7 +143,9 @@ function Update() {
       type="submit"
       className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition"
     >
-      Update Listing
+      {
+        loading ? "Updating.."  : "Update Listing"
+      }
     </button>
   </div>
 </form>
