@@ -1,6 +1,8 @@
 import express from "express";
 import Listing from "../model/listing.model.js";
-
+import {asyncHandler} from "../utils/asyncHandler.js"
+import {uploadOnCloudinary} from "../utils/cloudinary.service.js"
+import { ApiError } from "../utils/ApiError.js";
 export const findAllListings = async (req, res) => {
   try {
     const myListing = await Listing.find();
@@ -40,19 +42,16 @@ export const findSingleListing = async (req, res) => {
   }
 };
 
-export const createNewListing = async (req, res) => {
-  try {
-    console.log(req)
-    const newListing = new Listing(req.body);
-    await newListing.save();
-    res.json({ msg : newListing });
-  } catch (error) {
-    console.log("create listing", error);
-    return res.status(500).json({
-      message: "server error",
-    });
-  }
-};
+export const createNewListing = asyncHandler(async (req, res) => {
+    const localFilePath = req.files.image[0].path
+    console.log(localFilePath)
+    const response = await uploadOnCloudinary(localFilePath)
+  console.log(response.url)
+    if(response == null) throw new ApiError(501, "file is not saved")
+    const createdUser = await Listing.create({...req.body, image : response.url})
+    res.json({ msg : createdUser });
+}) ;
+
 
 export const updateListing = async (req, res) => {
   try {

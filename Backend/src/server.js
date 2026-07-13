@@ -1,5 +1,10 @@
+import "dotenv/config"// this should be in the project first 
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config(
+  {
+    path : "./.env"
+  }
+);
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -23,7 +28,6 @@ db_connection().then(()=>{
 }).catch((err)=>{
   console.log("mongodb connetion error", err)
 })
-
 
 import listingsRouter from "./routes/listings.routes.js";
 import userRouter from "./routes/user.routes.js"
