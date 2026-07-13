@@ -3,30 +3,46 @@
   import axios from "axios";
   export default function Create() {
     let navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
     const [form, setForm] = useState({
       name: "",
       description: "",
       country: "",
       location: "",
       price :"", 
-      image : ""
+      image : null
 
     });
     let handleInput = (event) =>{
       setForm({...form, [event.target.name] : event.target.value,});
     }
+    let handelFile = (event) =>{
+      const file = event.target.files[0]
+      setForm({...form, image : file})
+    }
     let onSubmit = async (event) =>{
-
+      setLoading(true)
       event.preventDefault();
-      let res = await axios.post("/api/listings", {form}, {headers: { "Content-Type": "multipart/form-data" }});  
+      // we are using the new form data just becuase when we pass the all form data through the useState variable then axios internally stringyfies it thats why when we send the file then file path become empty or null thats why we do this 
+      
+      const fd = new FormData();
+      fd.append("name" , form.name)
+      fd.append("description" , form.description)
+      fd.append("country" , form.country)
+      fd.append("location" , form.location)
+      fd.append("price" , form.price)
+      fd.append("image" , form.image)
+      let res = await axios.post("/api/listings", fd);  
       console.log(form)
       setForm({
           name: "",
       description: "",
       country: "",
       location: "",
-      price:""
+      price:"", 
+      image : null
       })
+      setLoading(false)
       navigate("/")
 
     }
@@ -71,7 +87,7 @@
           type="file"
           placeholder="https://example.com/image.jpg"
           name="image"
-          onChange={handleInput}
+          onChange={handelFile}
           className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
@@ -112,8 +128,9 @@
       <button
         type="submit"
         className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition"
+        
       >
-        Create Listing
+        {loading ? "Creating..." : "Create Listing"}
       </button>
     </div>
   </form>
