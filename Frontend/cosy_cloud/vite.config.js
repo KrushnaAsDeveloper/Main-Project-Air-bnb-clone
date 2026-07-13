@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   server:{
     proxy : {
-      '/api' : "http://localhost:5000"
+      '/api' : "https://main-project-air-bnb-clone.onrender.com/"
     }
   }, 
   plugins: [react(), tailwindcss(),],
