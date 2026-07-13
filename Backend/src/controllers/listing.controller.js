@@ -53,20 +53,18 @@ export const createNewListing = asyncHandler(async (req, res) => {
 }) ;
 
 
-export const updateListing = async (req, res) => {
-  try {
+export const updateListing = asyncHandler( async (req, res) => {
+    const localFilePath = req.files.image[0].path
+    const response = await uploadOnCloudinary(localFilePath)
+    if(response == null) throw new ApiError(501, "Error while updating the image")
+
     let id = req.params.id;
-    let updateList = await Listing.findByIdAndUpdate(id, req.body, {
+    let updateList = await Listing.findByIdAndUpdate(id, {...req.body , image : response.url}, {
       new: true,
     });
     res.json(updateList);
-  } catch (error) {
-    console.log("update listing", error);
-    return res.status(500).json({
-      message: "server error",
-    });
-  }
-};
+  
+});
 
 export const deleteListing = async (req, res) => {
   try {

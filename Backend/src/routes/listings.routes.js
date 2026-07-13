@@ -16,9 +16,12 @@ router.post("/" , upload.fields([{
     maxCount : 1
 }]), createNewListing)
 // put - /listing/:id
-router.put("/:id", protect, updateListing)
+router.put("/:id",upload.fields([{
+    name : "image", 
+    maxCount : 1
+}]), updateListing)
 // delete = /listing/:id
-router.delete("/:id", protect, deleteListing)
+router.delete("/:id", deleteListing)
 
 
 export default router;
