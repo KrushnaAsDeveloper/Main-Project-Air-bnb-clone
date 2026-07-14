@@ -28,7 +28,7 @@ fetchSingleData()
   }
   return (
     <>
-     <div className="w-[80vw] mx-auto my-10 bg-gray-100 relative rounded-2xl shadow-md  ">
+     <div className="w-[90vw] mx-auto my-10 bg-gray-100 relative rounded-2xl shadow-md  ">
       {/* Title */}
       <div className="px-6 pt-6 pb-4 ">
         <h1 className="text-4xl font-semibold text-gray-900">{listing.name}</h1>
@@ -38,7 +38,7 @@ fetchSingleData()
       <img
         src={listing.image}
         alt={listing.title}
-        className="w-full h-150 object-cover"
+        className="w-full h-full object-cover"
       />
 
       {/* Details */}

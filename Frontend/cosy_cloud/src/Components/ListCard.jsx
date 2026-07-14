@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 export default function ListCard({ listing }) {
   const navigate = useNavigate();
-
- 
+  
   return (
     <>
       <div className="flex flex-wrap">
         <NavLink to={`listings/${listing._id}/details`}>
 
-        <div className="w-[30rem] bg-white rounded-2x overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300  p-10 m-10">
-          <div className="w-full h-[16rem] overflow-hidden">
+        <div className=" md:w-[30rem]  w-[25rem] h-[32rem] bg-white rounded-2x overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-200 md:m-10  p-10 my-10">
+          <div className="w-full h-[15rem] overflow-hidden">
             <img
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               src={listing.image}
