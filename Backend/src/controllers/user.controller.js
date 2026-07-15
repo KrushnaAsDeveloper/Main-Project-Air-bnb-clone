@@ -28,3 +28,24 @@ export const registerUser = asyncHandler(async (req, res) => {
     new ApiResponse(200, "User created successfully", user)
   )
 });
+
+export const loginUser = asyncHandler( async (req, res)=>{
+    const {email, password} = req.body;
+    const existedUser = await User.findOne({email})
+    if(!existedUser){
+      throw new ApiError(401, "User Not Existed ! Please Register")
+    }
+    // compare entered password with existed password 
+    const check = await existedUser.comparePassword(password);
+    if (!check) {
+      throw new ApiError(400, "Password is incorrect !")
+    }
+
+    //add refresh token 
+    // add access token 
+    const token = existedUser.genrateAccessToken()
+
+    res.status(201).json(new ApiResponse(200, 'Your Loged in'))
+
+
+})

@@ -33,21 +33,6 @@ userSchema.pre("save", async function() {
 userSchema.methods.comparePassword = async function(password) {
     return bcrypt.compare(password, this.password)
 }
-
-userSchema.methods.genrateAccessToken = function() {
-    return jwt.sign(
-        {
-        _id : this._id, 
-        username : this.username, 
-        email : this.email,
-        
-    },  
-    process.env.ACCESS_TOKEN_SECRET, 
-    {
-        expiresIn : process.env.ACCESS_TOKEN_EXPIREY
-    }
-    )
-}
 userSchema.methods.genrateAccessToken = function() {
     return jwt.sign(
         {
