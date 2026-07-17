@@ -76,7 +76,7 @@ export const loginUser = asyncHandler( async (req, res)=>{
     .status(201)
     .cookie("accessToken", accessToken)
     .cookie("refreshToken", refreshToken)
-    .json(new ApiResponse(200, 'Your Logged in', updatedUser))
+    .json(new ApiResponse(200, 'Your Logged in', {user : accessToken, refreshToken, updatedUser }))
 
 
 })
