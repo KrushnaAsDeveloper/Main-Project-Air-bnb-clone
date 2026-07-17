@@ -24,7 +24,7 @@ app.use(express.json({limit : "20kb"}));
 
 db_connection().then(()=>{
   app.listen(process.env.PORT || 8000, ()=>{
-    console.log(`server is running on port ${process.env.PORT || 8000} http://localhost:${process.env.PORT || 8000}/api/listings/`)
+    console.log(`server is running on port ${process.env.PORT || 8000} http://localhost:${process.env.PORT || 8000}/api/v1/listings/`)
   })
 }).catch((err)=>{
   console.log("mongodb connetion error", err)
@@ -32,7 +32,7 @@ db_connection().then(()=>{
 
 import listingsRouter from "./routes/listings.routes.js";
 import userRouter from "./routes/user.routes.js"
-app.use("/api/listings", listingsRouter);
+app.use("/api/v1/listings", listingsRouter);
 app.use("/api/v1/auth", userRouter)
 
 

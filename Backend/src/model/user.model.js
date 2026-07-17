@@ -22,6 +22,9 @@ const userSchema = mongoose.Schema({
         required : true, 
         minlength : 6
 
+    }, 
+    refreshToken :{
+        type :String
     }
 }, {timestamps : true})
 
@@ -48,7 +51,7 @@ userSchema.methods.genrateAccessToken = function() {
     )
 }
 userSchema.methods.genrateRefreshToken = function() {
-    const token =  jwt.sign(
+    return jwt.sign(
         {
         _id : this._id, 
         
