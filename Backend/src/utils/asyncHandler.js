@@ -9,7 +9,7 @@
 // }
 
  const asyncHandler = (fn) => async (req, res, next)=>{
-    return Promise.resolve(fn(req,res,next)).catch(error =>next(error))
+    return Promise.resolve(fn(req,res,next)).catch(error => next(error))
  }
 // one more variety use in the production where we directly handle the promise 
 
